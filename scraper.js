@@ -3,7 +3,7 @@ const { IncomingWebhook } = require("@slack/webhook");
 const { Cluster } = require("puppeteer-cluster");
 const fs = require("fs").promises;
 const webhookurl =
-  "https://hooks.slack.com/services/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";
+  "https://hooks.slack.com/services/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";
 const webhook = new IncomingWebhook(webhookurl);
 
 (async () => {

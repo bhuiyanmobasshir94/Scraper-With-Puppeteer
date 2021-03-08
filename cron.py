@@ -3,7 +3,7 @@ import time
 from slack_webhook import Slack
 
 slack = Slack(
-    url="https://hooks.slack.com/services/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"
+    url="https://hooks.slack.com/services/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"
 )
 
 
