@@ -1,9 +1,10 @@
 const { IncomingWebhook } = require("@slack/webhook");
 const { Cluster } = require("puppeteer-cluster");
 const fs = require("fs").promises;
-const webhookurl =
-  "https://hooks.slack.com/services/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";
+const webhookurl = "xxx";
 const webhook = new IncomingWebhook(webhookurl);
+const axios = require("axios");
+const SERVER = "http://127.0.0.1:8143/create-item/";
 
 (async () => {
   const cluster = await Cluster.launch({
@@ -41,21 +42,29 @@ const webhook = new IncomingWebhook(webhookurl);
           price: price,
         });
       });
-      let items = {
-        redditPosts: scrapeItems,
-      };
+      let items = { items: scrapeItems };
       return items;
     });
+    if (stock["items"].length > 0) {
+      axios
+        .post(SERVER, stock)
+        .then(function (response) {
+          console.log("Success!!");
+        })
+        .catch(function (error) {
+          console.log("Error!!");
+        });
+    }
     console.log(stock);
   });
 
   cluster.on("taskerror", (err, data) => {
     (async () => {
       await webhook.send({
-        text: `  Error crawling ${data}: ${err.message}`,
+        text: `Error crawling ${data}: ${err.message}`,
       });
     })();
-    console.log(`  Error crawling ${data}: ${err.message}`);
+    console.log(`Error crawling ${data}: ${err.message}`);
   });
 
   const csvFile = await fs.readFile(__dirname + "/pages.csv", "utf8");
