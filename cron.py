@@ -1,13 +1,17 @@
 import os
 import time
 from slack_webhook import Slack
+from dotenv import load_dotenv
 
-slack = Slack(
-    url="https://hooks.slack.com/services/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"
-)
+from pathlib import Path
+
+env_path = Path(".") / ".env"
+load_dotenv(dotenv_path=env_path)
+
+slack = Slack(url=os.getenv("NOTIFICATION_SLACK"))
 
 
 while True:
-    os.system("node scraper.js")
+    os.system("node product_scraper.js")
     slack.post(text="Ran scrapper...")
-    time.sleep(10)
+    time.sleep(20)
