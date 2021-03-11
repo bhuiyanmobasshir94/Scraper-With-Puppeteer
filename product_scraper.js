@@ -1,7 +1,9 @@
 const { IncomingWebhook } = require("@slack/webhook");
 const { Cluster } = require("puppeteer-cluster");
 const fs = require("fs").promises;
-const webhookurl = "xxx";
+const dotenv = require("dotenv");
+dotenv.config();
+const webhookurl = process.env.DHAMAKA_SLACK;
 const webhook = new IncomingWebhook(webhookurl);
 const axios = require("axios");
 const SERVER = "http://127.0.0.1:8143/create-item/";
