@@ -2,3 +2,4 @@ node_modules/
 *.pyc
 .env
 *.sqlite3
+rest_server/db.sqlite3
