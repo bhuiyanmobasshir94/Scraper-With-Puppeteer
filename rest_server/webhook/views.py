@@ -23,7 +23,7 @@ env_path = Path(settings.BASE_DIR).parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 slack = Slack(url=os.getenv("DHAMAKA_SLACK"))
-slack.post(text="I am in...")
+slack.post(text="I am in... <@U01QD3712LV> <@U01R2PY8HFD> Chutiya!!")
 
 PHONES = ("Xiaomi", "Infinix", "Realme")
 
@@ -62,12 +62,12 @@ class ItemCreateAPIView(APIView):
                 obj, created = Item.objects.update_or_create(url=url, defaults=item)
                 if created and obj.title.startswith(PHONES):
                     slack.post(
-                        text=f"New Item added!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price} <@U01QD3712LV>"
+                        text=f"New Item added!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price} <@U01QD3712LV> <@U01R2PY8HFD> Chutiya!!"
                     )
                 else:
                     if obj.stock_status == "" and obj.title.startswith(PHONES):
                         slack.post(
-                            text=f"Stock Available!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price} <@U01QD3712LV>"
+                            text=f"Stock Available!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price} <@U01QD3712LV> <@U01R2PY8HFD> chutiya!!"
                         )
             except Exception as e:
                 print(e)
