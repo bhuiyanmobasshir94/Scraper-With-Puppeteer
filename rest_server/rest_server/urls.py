@@ -13,4 +13,5 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("create-item/", views.ItemCreateAPIView.as_view()),
     path("list-item/", views.ItemListAPIView.as_view()),
+    path("item/<int:pk>", views.ItemAPIView.as_view()),
 ]

@@ -62,12 +62,12 @@ class ItemCreateAPIView(APIView):
                 obj, created = Item.objects.update_or_create(url=url, defaults=item)
                 if created and obj.title.startswith(PHONES):
                     slack.post(
-                        text=f"New Item added!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price} <@U01QD3712LV> <@U01R2PY8HFD> Chutiya!!"
+                        text=f"New Item added!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price: {obj.price - (obj.price * .2)} <@U01QD3712LV> <@U01R2PY8HFD> Chutiya!!"
                     )
                 else:
                     if obj.stock_status == "" and obj.title.startswith(PHONES):
                         slack.post(
-                            text=f"Stock Available!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price} <@U01QD3712LV> <@U01R2PY8HFD> chutiya!!"
+                            text=f"Stock Available!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price: {obj.price - (obj.price * .2)} <@U01QD3712LV> <@U01R2PY8HFD> chutiya!!"
                         )
             except Exception as e:
                 print(e)
@@ -77,9 +77,11 @@ class ItemCreateAPIView(APIView):
 class ItemListAPIView(generics.ListAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-    ]
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ["title"]
     ordering_fields = ["date"]
+
+
+class ItemAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
