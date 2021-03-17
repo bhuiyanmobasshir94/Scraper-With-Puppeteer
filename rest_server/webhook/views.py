@@ -61,14 +61,16 @@ class ItemCreateAPIView(APIView):
             try:
                 obj, created = Item.objects.update_or_create(url=url, defaults=item)
                 if created and obj.title.startswith(PHONES):
-                    slack.post(
-                        text=f"New Item added!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price: {obj.price - (obj.price * .2)} <@U01QD3712LV> <@U01R2PY8HFD> Chutiya!!"
-                    )
+                    price = float(obj.price[1:])
+                    text_ = f"New Item added!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price: {price - (price * .2)} <@U01QD3712LV> <@U01R2PY8HFD> Chutiya!!"
+                    print(text_)
+                    slack.post(text=text_)
                 else:
                     if obj.stock_status == "" and obj.title.startswith(PHONES):
-                        slack.post(
-                            text=f"Stock Available!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price: {obj.price - (obj.price * .2)} <@U01QD3712LV> <@U01R2PY8HFD> chutiya!!"
-                        )
+                        price = float(obj.price[1:])
+                        text_ = f"Stock Available!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price: {price - (price * .2)} <@U01QD3712LV> <@U01R2PY8HFD> chutiya!!"
+                        print(text_)
+                        slack.post(text=text_)
             except Exception as e:
                 print(e)
         return Response("")
