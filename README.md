@@ -8,3 +8,7 @@
 npm install axios
 npm install dotenv
 ```
+
+# To be added
+- Comparison between requested price and new price
+- Taking decision based on price comparison
