@@ -25,7 +25,7 @@ load_dotenv(dotenv_path=env_path)
 slack = Slack(url=os.getenv("DHAMAKA_SLACK"))
 slack.post(text="I am in... <@U01QD3712LV> <@U01R2PY8HFD> Chutiya!!")
 
-PHONES = ("Xiaomi", "Infinix", "Realme")
+PHONES = ("Xiaomi", "Infinix", "Realme", "Redmi")
 
 
 class UserViewSet(viewsets.ModelViewSet):
