@@ -23,7 +23,7 @@ env_path = Path(settings.BASE_DIR).parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 slack = Slack(url=os.getenv("DHAMAKA_SLACK"))
-slack.post(text="I am in... <@U01QD3712LV> <@U01R2PY8HFD> Chutiya!!")
+slack.post(text="I am in... <@U01QD3712LV> <@U01R2PY8HFD>!!")
 
 PHONES = ("Xiaomi", "Infinix", "Realme", "Redmi")
 
@@ -62,13 +62,13 @@ class ItemCreateAPIView(APIView):
                 obj, created = Item.objects.update_or_create(url=url, defaults=item)
                 if created and obj.title.startswith(PHONES):
                     price = float(obj.price[1:])
-                    text_ = f"New Item added!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price: {price - (price * .2)} <@U01QD3712LV> <@U01R2PY8HFD> Chutiya!!"
+                    text_ = f"New Item added!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price (max 2000 BDT): {price - min((price * .2), 2000)} <@U01QD3712LV> <@U01R2PY8HFD>!!"
                     print(text_)
                     slack.post(text=text_)
                 else:
                     if obj.stock_status == "" and obj.title.startswith(PHONES):
                         price = float(obj.price[1:])
-                        text_ = f"Stock Available!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price: {price - (price * .2)} <@U01QD3712LV> <@U01R2PY8HFD> chutiya!!"
+                        text_ = f"Stock Available!! {obj.title}, url: {obj.url}, status: {obj.stock_status}, price: {obj.price}, after 20% discounted price (max 2000 BDT): {price - min((price * .2), 2000)} <@U01QD3712LV> <@U01R2PY8HFD>!!"
                         print(text_)
                         slack.post(text=text_)
             except Exception as e:
