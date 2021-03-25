@@ -12,4 +12,3 @@ npm install dotenv
 # To be added
 - Comparison between requested price and new price
 - Taking decision based on price comparison
-- To work with Generic API view
