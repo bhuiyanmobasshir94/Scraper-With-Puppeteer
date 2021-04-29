@@ -28,7 +28,7 @@ slack.post(text="I am in... <@U01QD3712LV> <@U01R2PY8HFD>!!")
 PHONES = ("Xiaomi", "Realme", "Redmi")
 
 def kw_in_title(title):
-    KEYWORDS = ["c21", "c17", "narzo", "c25", "m2"]
+    KEYWORDS = ["c21", "c17", "narzo", "c25", "poco"]
     for KW in KEYWORDS:
         if KW in title:
             return True
