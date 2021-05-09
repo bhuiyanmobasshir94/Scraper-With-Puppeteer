@@ -25,10 +25,10 @@ load_dotenv(dotenv_path=env_path)
 slack = Slack(url=os.getenv("DHAMAKA_SLACK"))
 slack.post(text="I am in... <@U01QD3712LV> <@U01R2PY8HFD>!!")
 
-PHONES = ("Xiaomi", "Realme", "Redmi")
+PHONES = () #("Xiaomi", "Realme", "Redmi")
 
 def kw_in_title(title):
-    KEYWORDS = ["c21", "c17", "narzo", "c25", "poco"]
+    KEYWORDS = ["c21"] #["c21", "c17", "narzo", "c25", "poco"]
     for KW in KEYWORDS:
         if KW in title:
             return True
