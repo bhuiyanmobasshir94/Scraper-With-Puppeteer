@@ -2,3 +2,4 @@ let allPosts = document.body.querySelectorAll("div.user-account-content-tab-hist
 scrapeItems = [];
 allPosts.forEach((item) => { let orderId = item.querySelector("div.f-l span b").innerText; scrapeItems.push({item: item.innerText, orderId: orderId});})
 scrapeItems.forEach((item) => {console.log(item)})
+JSON.stringify(scrapeItems)
